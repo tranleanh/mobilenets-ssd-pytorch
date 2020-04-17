@@ -1,6 +1,7 @@
-# Emotion-Prediction
+# MobileNetV2-SSD
 
-Face-Detection-based Emotion Prediction
+Object Detection with MobileNetV2-SSD
 
-Nov. 2019
+April 2020
+
 Tran Le Anh
