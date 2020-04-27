@@ -4,6 +4,9 @@ Object Detection with MobileNet-SSD, MobileNetV2-SSD on VOC, BDD100K Datasets
 
 (being updated)
 
+## References
+- https://github.com/qfgaohao/pytorch-ssd
+
 April 2020
 
 Tran Le Anh
