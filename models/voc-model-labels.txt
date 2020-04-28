@@ -1,0 +1,11 @@
+BACKGROUND
+train
+truck
+traffic light
+traffic sign
+rider
+person
+bus
+bike
+car
+motor
