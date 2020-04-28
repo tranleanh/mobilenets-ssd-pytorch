@@ -2,7 +2,8 @@
 
 Object Detection with MobileNet-SSD, MobileNetV2-SSD on VOC, BDD100K Datasets
 
-(being updated)
+===> (LOADING 20%...)
+
 ## Results
 1. Detection
 
