@@ -2,7 +2,7 @@
 
 Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Datasets
 
-===> (LOADING 20%...)
+==================================> (LOADING 50%...)
 
 ## Results
 1. Detection
@@ -37,6 +37,14 @@ $ wget -P models https://storage.googleapis.com/models-hao/mb2-ssd-lite-mp-0_686
 ```
 ## Train
 ## Test
+1. Test on image
+```bashrc
+$ python ssd_test_img.py
+```
+2. Test on video
+```bashrc
+$ python ssd_test_video.py
+```
 
 ## References
 - https://github.com/qfgaohao/pytorch-ssd
