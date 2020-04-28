@@ -17,6 +17,25 @@ Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Dataset
 - PyTorch
 - Pyenv (optional)
 
+## Dataset Path (optional)
+The dataset path should be structured as follow:
+```bashrc
+|- bdd100k -- bdd100k -- images -- 100k -- train
+|                     |                 |- val
+|                     |- labels
+|                     |- xml -- train
+|                            |- val
+|
+|- MobileNets-SSD -- data -- VOCdevkit -- test -- VOC2007
+     (our repo)   |                    |- VOC2007
+                  |- bdd_files
+                  |- images
+                  |- models
+                  |- ...
+                  |- train_ssd_BDD.py
+                  |- ssd_test_img.py
+                  |- ...
+```
 ## Pre-processing
 1. Convert BDD100K anotation format (.json) to VOC anotation format (.xml)
 ```bashrc
