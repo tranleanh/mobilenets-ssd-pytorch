@@ -87,6 +87,7 @@ $ python ssd_test_video.py
 
 ## References
 - https://github.com/qfgaohao/pytorch-ssd
+- https://github.com/leeesangwon/bdd100k_to_VOC
 
 April 2020
 
