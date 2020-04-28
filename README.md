@@ -20,14 +20,14 @@ Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Dataset
 ## Dataset Path (optional)
 The dataset path should be structured as follow:
 ```bashrc
-|- bdd100k -- bdd100k -- images -- 100k -- train
-|                     |                 |- val
+|- bdd100k -- bdd100k -- images -- 100k -- train -- (70000 images)
+|                     |                 |- val -- (10000 images)
 |                     |- labels
 |                     |- xml -- train
 |                            |- val
 |
-|- MobileNets-SSD -- data -- VOCdevkit -- test -- VOC2007
-     (our repo)   |                    |- VOC2007
+|- MobileNets-SSD -- data -- VOCdevkit -- test -- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
+     (our repo)   |                    |- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
                   |- bdd_files
                   |- images
                   |- models
