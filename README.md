@@ -8,10 +8,7 @@ Object Detection with MobileNet-SSD, MobileNetV2-SSD on VOC, BDD100K Datasets
 
 <img src="readme_images/detection_105e.jpg" width="1200">
 
-2. Youtube video
-
-- https://www.youtube.com/watch?v=0u3f4t-Wkv4
-
+2. View the result on [Youtube](https://www.youtube.com/watch?v=0u3f4t-Wkv4)
 
 ## Dependencies
 - Python 3.6+
