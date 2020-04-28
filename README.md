@@ -22,12 +22,15 @@ The dataset path should be structured as follow:
 ```bashrc
 |- bdd100k -- bdd100k -- images -- 100k -- train -- (70000 images)
 |                     |                 |- val -- (10000 images)
-|                     |- labels
-|                     |- xml -- train
-|                            |- val
+|                     |
+|                     |- labels -- (.json)
+|                     |
+|                     |- xml -- train -- (.xml)
+|                            |- val -- (.xml)
 |
 |- MobileNets-SSD -- data -- VOCdevkit -- test -- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
      (our repo)   |                    |- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
+                  |
                   |- bdd_files
                   |- images
                   |- models
@@ -35,6 +38,7 @@ The dataset path should be structured as follow:
                   |- train_ssd_BDD.py
                   |- ssd_test_img.py
                   |- ...
+@TranLeAnh
 ```
 ## Pre-processing
 1. Convert BDD100K anotation format (.json) to VOC anotation format (.xml)
