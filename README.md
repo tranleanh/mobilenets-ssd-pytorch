@@ -1,6 +1,6 @@
-# MobileNet-SSD and MobileNetV2-SSD with PyTorch
+# MobileNet-SSD and MobileNetV2-SSDLite with PyTorch
 
-Object Detection with MobileNet-SSD, MobileNetV2-SSD on VOC, BDD100K Datasets
+Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Datasets
 
 ===> (LOADING 20%...)
 
@@ -26,7 +26,15 @@ $ python bdd2voc.py
 ```bashrc
 notebook: remove_nolabel_samples_bdd.ipynb
 ```
-
+## Download Pre-trained Models (VOC)
+1. MobileNet-SSD
+```bashrc
+$ wget -P models https://storage.googleapis.com/models-hao/mobilenet-v1-ssd-mp-0_675.pth
+```
+2. MobileNetV2-SSDLite
+```bashrc
+$ wget -P models https://storage.googleapis.com/models-hao/mb2-ssd-lite-mp-0_686.pth
+```
 ## Train
 ## Test
 
