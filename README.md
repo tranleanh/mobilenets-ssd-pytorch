@@ -1,4 +1,4 @@
-# MobileNetV2-SSD
+# MobileNet-SSD and MobileNetV2-SSD with PyTorch
 
 Object Detection with MobileNet-SSD, MobileNetV2-SSD on VOC, BDD100K Datasets
 
