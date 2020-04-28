@@ -1,0 +1,11 @@
+*** Train MobileNet-SSD (VOC)
+python train_ssd_VOC.py --datasets ~/data/VOCdevkit/VOC2007/ --validation_dataset ~/data/VOCdevkit/test/VOC2007/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 24 --num_epochs 100 --scheduler cosine --lr 0.01 --t_max 200
+
+*** Train MobileNet-SSD (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200
+
+*** Train pretrained-model (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200 --resume models/mb1-ssd-Epoch-105-Loss-inf.pth
+
+*** Train pretrained-model MobileNetV2-SSDLite (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --pretrained_ssd models/mb2-ssd-lite-net.pth --scheduler cosine --lr 0.01 --t_max 100 --batch_size 36 --num_epochs 200
