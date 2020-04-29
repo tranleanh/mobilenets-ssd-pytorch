@@ -1,8 +1,9 @@
-# MobileNet-SSD and MobileNetV2-SSDLite with PyTorch
+# MobileNet-SSD and MobileNetV2-SSD/SSDLite with PyTorch
 
 Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Datasets
 
 ================================================================> (LOADING 99%...)
+(MoblieNetV2-SSD will be uploaded soon)
 
 ## Results
 1. Detection
