@@ -1,8 +1,8 @@
 # MobileNet-SSD and MobileNetV2-SSD/SSDLite with PyTorch
 
-Object Detection with MobileNet-SSD, MobileNetV2-SSDLite on VOC, BDD100K Datasets
+Object Detection with MobileNet-SSD, MobileNetV2-SSD/SSDLite on VOC, BDD100K Datasets
 
-================================================================> (LOADING 99%...)
+=========> (LOADING...)
 (MobileNetV2-SSD will be uploaded soon)
 
 ## Results
@@ -48,7 +48,7 @@ $ python bdd2voc.py
 ```
 2. Remove training samples having no anotation (70000 to 69863)
 ```bashrc
-notebook: remove_nolabel_samples_bdd.ipynb
+notebook: remove_nolabel_data.ipynb
 ```
 ## Download Pre-trained Models (VOC)
 1. MobileNet-SSD
@@ -84,6 +84,21 @@ $ python ssd_test_img.py
 2. Test on video
 ```bashrc
 $ python ssd_test_video.py
+```
+## Produce Detection Information
+- Print out text file (.txt) of dectection information
+```bashrc
+notebook: print_text_files.ipynb
+```
+- File format: {image_name}.txt
+```bashrc
+car 0.980528 194 356 466 513
+car 0.897605 752 372 975 467
+car 0.414176 580 372 646 416
+traffic_light 0.605162 844 178 867 225
+traffic_light 0.602555 816 176 841 224
+traffic_light 0.495851 109 62 141 124
+truck 0.580303 167 265 485 483
 ```
 
 ## References
