@@ -92,6 +92,7 @@ notebook: print_text_files.ipynb
 ```
 - File format: {image_name}.txt
 ```bashrc
+class_name confidence x1 y1 x2 y2
 car 0.980528 194 356 466 513
 car 0.897605 752 372 975 467
 car 0.414176 580 372 646 416
