@@ -1,9 +1,6 @@
 # MobileNet-SSD and MobileNetV2-SSD/SSDLite with PyTorch
 
-Object Detection with MobileNet-SSD, MobileNetV2-SSD/SSDLite on VOC, BDD100K Datasets
-
-=========> (LOADING...)
-(MobileNetV2-SSD will be uploaded soon)
+Object Detection with MobileNet-SSD, MobileNetV2-SSD/SSDLite on VOC, BDD100K Datasets.
 
 ## Results
 1. Detection
@@ -62,15 +59,15 @@ $ wget -P models https://storage.googleapis.com/models-hao/mb2-ssd-lite-mp-0_686
 ## Train
 1. Train MobileNet-SSD (VOC)
 ```bashrc
-$ python train_ssd_VOC.py --datasets ~/data/VOCdevkit/VOC2007/ --validation_dataset ~/data/VOCdevkit/test/VOC2007/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 24 --num_epochs 100 --scheduler cosine --lr 0.01 --t_max 200
+$ python train_ssd_VOC.py --datasets ~/data/VOCdevkit/VOC2007/ --validation_dataset ~/data/VOCdevkit/test/VOC2007/ --net mb1-ssd --batch_size 24 --num_epochs 100 --scheduler cosine --lr 0.01 --t_max 200
 ```
 2. Train MobileNet-SSD (BDD100K)
 ```bashrc
-$ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200
+$ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200
 ```
-3. Train pretrained-model (BDD100K)
+3. Resume training a trained model (BDD100K)
 ```bashrc
-$ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200 --resume models/mb1-ssd-Epoch-105-Loss-inf.pth 
+$ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200 --resume models/mb1-ssd-Epoch-105-Loss-inf.pth 
 ```
 4. Train pretrained-model MobileNetV2-SSDLite (BDD100K)
 ```bashrc
