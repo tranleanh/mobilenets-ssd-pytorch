@@ -1,0 +1,37 @@
+***
+python bdd_data/label2det.py bdd100k/labels/bdd100k_labels_images_train.json bdd100k/detection_train.json
+
+*** Train MobileNet-SSD (VOC)
+python train_ssd_VOC.py --datasets ~/data/VOCdevkit/VOC2007/ --validation_dataset ~/data/VOCdevkit/test/VOC2007/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 24 --num_epochs 100 --scheduler cosine --lr 0.01 --t_max 200
+
+
+*** Train MobileNet-SSD (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite  --batch_size 10 --num_epochs 400 --scheduler cosine --lr 0.001 --t_max 400 --debug_steps 10
+
+
+
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite  --batch_size 10 --num_epochs 300 --scheduler cosine --lr 0.01 --t_max 300 --debug_steps 10
+
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --batch_size 5 --num_epochs 200 --scheduler cosine --lr 0.0005 --t_max 200 --resume models/mb2-ssd-lite-mosaic-non-small-person-epoch-215-loss-3.9640621987600175.pth --debug_steps 10
+
+
+*** Citypersons
+python train_ssd_citypersons.py --datasets ../citypersons/train/ --validation_dataset ../citypersons/val/ --net mb2-ssd-lite  --batch_size 6 --num_epochs 300 --scheduler cosine --lr 0.01 --t_max 300 --debug_steps 10
+
+
+
+
+*** Train on Augmented Data
+python train_ssd_BDD.py --datasets ../data_augment/new_person_samples/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 100 --debug_steps 10
+
+
+*** Train pretrained-model MobileNetV2-SSD (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --pretrained_ssd models/mb2-ssd-lite-Epoch-90-Loss-inf.pth --scheduler cosine --lr 0.01 --t_max 100 --batch_size 60 --num_epochs 200  --debug_steps 10
+
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --base_net models/mb2-ssd-lite-Epoch-90-Loss-inf.pth  --batch_size 60 --num_epochs 300 --scheduler cosine --lr 0.01 --t_max 200 --resume models/mb2-ssd-lite-Epoch-90-Loss-inf.pth
+
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --batch_size 36 --num_epochs 300 --scheduler cosine --lr 0.005 --t_max 300 --resume models/mb2-ssd-lite-Epoch-150-ran-add.pth  --debug_steps 10
+
+
+*** Train pretrained-model (BDD100K)
+python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb1-ssd --base_net models/mobilenet_v1_with_relu_69_5.pth  --batch_size 48 --num_epochs 200 --scheduler cosine --lr 0.01 --t_max 200 --resume models/mb1-ssd-Epoch-105-Loss-inf.pth
