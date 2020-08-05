@@ -73,6 +73,12 @@ $ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --val
 ```bashrc
 $ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --pretrained_ssd models/mb2-ssd-lite-net.pth --scheduler cosine --lr 0.01 --t_max 100 --batch_size 36 --num_epochs 200 
 ```
+
+## Resume Training
+```bashrc
+$ python train_ssd_BDD.py --datasets ../bdd100k/bdd100k/images/100k/train/ --validation_dataset ../bdd100k/bdd100k/images/100k/val/ --net mb2-ssd-lite --resume models/(trained-model-name).pth --batch_size 16 --num_epochs 100 --scheduler cosine --lr 0.001 --t_max 100 --debug_steps 10
+```
+
 ## Test
 1. Test on image
 ```bashrc
