@@ -13,12 +13,12 @@ from tqdm import tqdm
 
 DEBUG = False
 
-BDD_FOLDER = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k"
+BDD_FOLDER = osp.join("..", "bdd100k", "bdd100k")
 
 if DEBUG:
-    XML_PATH = "./xml"
+    XML_PATH = osp.join(".", "xml")
 else:
-    XML_PATH = BDD_FOLDER + "/xml"
+    XML_PATH = osp.join(BDD_FOLDER, "xml")
 
 
 def bdd_to_voc(bdd_folder, xml_folder):
@@ -28,8 +28,8 @@ def bdd_to_voc(bdd_folder, xml_folder):
     :param xml_folder: a path to save the xml files.
     :return:
     """
-    image_path = bdd_folder + "/images/100k/%s"
-    label_path = bdd_folder + "/labels/bdd100k_labels_images_%s.json"
+    image_path = osp.join(bdd_folder, "images", "100k", "%s")
+    label_path = osp.join(bdd_folder, "labels", "bdd100k_labels_images_%s.json")
 
     classes = set()
 

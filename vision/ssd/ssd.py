@@ -4,8 +4,8 @@ import numpy as np
 from typing import List, Tuple
 import torch.nn.functional as F
 
-# from ..utils import box_utils
-from ..utils import box_utils_numpy as box_utils
+from ..utils import box_utils
+# from ..utils import box_utils_numpy as box_utils
 
 from collections import namedtuple
 GraphPath = namedtuple("GraphPath", ['s0', 'name', 's1'])  #

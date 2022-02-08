@@ -14,11 +14,6 @@ class VOCDataset:
 			root: the root of the VOC2007 or VOC2012 dataset, the directory contains the following sub-directories:
 				Annotations, ImageSets, JPEGImages, SegmentationClass, SegmentationObject.
 		"""
-		# self.root = pathlib.Path(root)
-
-		# print(self.root)
-		# print("\n")
-
 		# self.root = self.root / "ssd_project/ssd-pytorch-leanh"
 		# self.root = './data/VOCdevkit/'
 
@@ -29,12 +24,12 @@ class VOCDataset:
 			# image_sets_file = self.root / "ImageSets/Main/test.txt"
 
 			# image_sets_file = self.root + "test/VOC2007/ImageSets/Main/test.txt"
-			image_sets_file = "./bdd_files/test.txt"
+			image_sets_file = os.path.join(".", "bdd_files", "test.txt")
 		else:
 			# image_sets_file = self.root / "ImageSets/Main/trainval.txt"
 
 			# image_sets_file = self.root + "VOC2007/ImageSets/Main/trainval.txt"
-			image_sets_file = "./bdd_files/trainval.txt"
+			image_sets_file = os.path.join(".", "bdd_files", "trainval.txt")
 
 
 		self.ids = VOCDataset._read_image_ids(image_sets_file)
@@ -116,20 +111,20 @@ class VOCDataset:
 		# annotation_file = self.root / f"Annotations/{image_id}.xml"
 
 		try:
-			annotation_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/xml/" + f"train/{image_id}.xml"
+			# annotation_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/xml/" + f"train/{image_id}.xml"
+			annotation_file = os.path.join("..", "bdd100k", "bdd100k", "xml", "train", f"{image_id}.xml")
 
 			objects = ET.parse(annotation_file).findall("object")
 
 			# print(1)
 
 		except:
-			annotation_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/xml/" + f"val/{image_id}.xml"
+			# annotation_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/xml/" + f"val/{image_id}.xml"
+			annotation_file = os.path.join("..", "bdd100k", "bdd100k", "xml", "val", f"{image_id}.xml")
 
 			objects = ET.parse(annotation_file).findall("object")
 
 			# print(2)
-
-		# objects = ET.parse(annotation_file).findall("object")
 
 		boxes = []
 		labels = []
@@ -165,17 +160,17 @@ class VOCDataset:
 
 		try:
 			# image_file = "./data/VOCdevkit/VOC2007/" + f"JPEGImages/{image_id}.jpg"
-			image_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/images/100k/" + f"train/{image_id}.jpg"
+			# image_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/images/100k/" + f"train/{image_id}.jpg"
+			image_file = os.path.join("..", "bdd100k", "bdd100k", "images", "100k", "train", f"{image_id}.jpg")
 
-			image = cv2.imread(str(image_file))
+			image = cv2.imread(image_file)
 			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 		except:
 			# image_file = "./data/VOCdevkit/test/VOC2007/" + f"JPEGImages/{image_id}.jpg"
-			image_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/images/100k/" + f"val/{image_id}.jpg"
+			# image_file = "/home/mju-hpc-01/LATran/MindinTech/ssd_project/bdd100k/bdd100k/images/100k/" + f"val/{image_id}.jpg"
+			image_file = os.path.join("..", "bdd100k", "bdd100k", "images", "100k", "val", f"{image_id}.jpg")
 
-			image = cv2.imread(str(image_file))
+			image = cv2.imread(image_file)
 			image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-		# image = cv2.imread(str(image_file))
-		# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 		return image
