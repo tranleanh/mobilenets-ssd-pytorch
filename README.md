@@ -52,16 +52,16 @@ $ unzip solesensei_bdd100k.zip
 
 # under 100k/train, some images are splitted into testA, testB, trainA, trainB.
 # extract them out.
-mv bdd100k/bdd100k/image bdd100k/
+$ mv bdd100k/bdd100k/image bdd100k/
 
-mv bdd100k/images/100k/train/testA/* bdd100k/images/100k/train/
-mv bdd100k/images/100k/train/testB/* bdd100k/images/100k/train/
-mv bdd100k/images/100k/train/trainA/* bdd100k/images/100k/train/
-mv bdd100k/images/100k/train/trainB/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/testA/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/testB/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/trainA/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/trainB/* bdd100k/images/100k/train/
 
 # bdd100k/bdd100k/labels is bdd100k/bdd100-_labels_release/bdd100k/labels
 # Change location of it to satisfy above directory structure.
-cp -r bdd100k_labels_release/bdd100k/labels/ ./bdd100k/
+$ cp -r bdd100k_labels_release/bdd100k/labels/ ./bdd100k/
 ```
 ## Pre-processing
 1. Convert BDD100K anotation format (.json) to VOC anotation format (.xml)
@@ -70,7 +70,7 @@ $ python bdd2voc.py
 ```
 2. Remove training samples having no anotation (70000 to 69863)
 ```bashrc
-python remove_nolabel_data.py
+$ python remove_nolabel_data.py
 ```
 ## Download Pre-trained Models (VOC)
 1. MobileNet-SSD
