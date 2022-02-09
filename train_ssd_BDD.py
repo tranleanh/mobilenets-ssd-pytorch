@@ -3,6 +3,7 @@ import argparse
 import logging
 import sys
 import itertools
+from tqdm import tqdm
 
 import torch
 from torch.utils.data import DataLoader, ConcatDataset
@@ -103,6 +104,8 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO,
 args = parser.parse_args()
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+print(DEVICE)
+
 if args.use_cuda and torch.cuda.is_available():
     torch.backends.cudnn.benchmark = True
     logging.info("Use Cuda.")
@@ -117,7 +120,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     writer = SummaryWriter()
     n_iter = 0
 
-    for i, data in enumerate(loader):
+    for i, data in tqdm(enumerate(loader)):
         images, boxes, labels = data
         images = images.to(device)
         boxes = boxes.to(device)
@@ -330,14 +333,14 @@ if __name__ == '__main__':
         train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
         
-        if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
-            val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
-            logging.info(
-                f"Epoch: {epoch}, " +
-                f"Validation Loss: {val_loss:.4f}, " +
-                f"Validation Regression Loss {val_regression_loss:.4f}, " +
-                f"Validation Classification Loss: {val_classification_loss:.4f}"
-            )
-            model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
-            net.save(model_path)
-            logging.info(f"Saved model {model_path}")
+        # if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
+        #     val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
+        #     logging.info(
+        #         f"Epoch: {epoch}, " +
+        #         f"Validation Loss: {val_loss:.4f}, " +
+        #         f"Validation Regression Loss {val_regression_loss:.4f}, " +
+        #         f"Validation Classification Loss: {val_classification_loss:.4f}"
+        #     )
+        model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}.pth")
+        net.save(model_path)
+        logging.info(f"Saved model {model_path}")
