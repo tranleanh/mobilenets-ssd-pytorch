@@ -4,8 +4,8 @@ import numpy as np
 from typing import List, Tuple
 import torch.nn.functional as F
 
-# from ..utils import box_utils
-from ..utils import box_utils_numpy as box_utils
+from ..utils import box_utils
+# from ..utils import box_utils_numpy as box_utils
 
 from collections import namedtuple
 GraphPath = namedtuple("GraphPath", ['s0', 'name', 's1'])  #
@@ -37,7 +37,8 @@ class SSD(nn.Module):
             self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         if is_test:
             self.config = config
-            self.priors = config.priors.to(self.device)
+            # self.priors = config.priors.to(self.device)
+            self.priors = config.priors.to("cpu")
             
     def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         confidences = []

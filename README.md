@@ -14,19 +14,26 @@ Object Detection with MobileNet-SSD, MobileNetV2-SSD/SSDLite on VOC, BDD100K Dat
 - OpenCV
 - PyTorch
 - Pyenv (optional)
+- tensorboard
+- tqdm
 
 ## Dataset Path (optional)
 The dataset path should be structured as follow:
 ```bashrc
+$ pip install --user kaggle
+$ kaggle datasets download solesensei/solesensei_bdd100k
+
+# Unzip downloaded zip file
+# follow instructions to conduct the directory structure as below.
 |- bdd100k -- bdd100k -- images -- 100k -- train -- (70000 images)
-|                     |                 |- val -- (10000 images)
+|               |                        |- val -- (10000 images)
 |                     |
 |                     |- labels -- (.json)
 |                     |
 |                     |- xml -- train -- (.xml)
-|                            |- val -- (.xml)
+|                     |- val -- (.xml)
 |
-|- MobileNets-SSD -- data -- VOCdevkit -- test -- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
+|- pytorch-ssd - data -- VOCdevkit -- test -- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
      (our repo)   |                    |- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
                   |
                   |- bdd_files
@@ -37,6 +44,24 @@ The dataset path should be structured as follow:
                   |- ssd_test_img.py
                   |- ...
 @TranLeAnh
+
+$ mkdir bdd100k
+$ mv solesensei_bdd100k.zip bdd100k
+$ cd bdd100k
+$ unzip solesensei_bdd100k.zip
+
+# under 100k/train, some images are splitted into testA, testB, trainA, trainB.
+# extract them out.
+$ mv bdd100k/bdd100k/image bdd100k/
+
+$ mv bdd100k/images/100k/train/testA/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/testB/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/trainA/* bdd100k/images/100k/train/
+$ mv bdd100k/images/100k/train/trainB/* bdd100k/images/100k/train/
+
+# bdd100k/bdd100k/labels is bdd100k/bdd100-_labels_release/bdd100k/labels
+# Change location of it to satisfy above directory structure.
+$ cp -r bdd100k_labels_release/bdd100k/labels/ ./bdd100k/
 ```
 ## Pre-processing
 1. Convert BDD100K anotation format (.json) to VOC anotation format (.xml)
@@ -45,7 +70,7 @@ $ python bdd2voc.py
 ```
 2. Remove training samples having no anotation (70000 to 69863)
 ```bashrc
-notebook: remove_nolabel_data.ipynb
+$ python remove_nolabel_data.py
 ```
 ## Download Pre-trained Models (VOC)
 1. MobileNet-SSD

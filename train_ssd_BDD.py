@@ -1,15 +1,14 @@
 import os
-os.environ['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES']='1'
-
 import argparse
 import logging
 import sys
 import itertools
+from tqdm import tqdm
 
 import torch
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim.lr_scheduler import CosineAnnealingLR, MultiStepLR
+from torch.utils.tensorboard import SummaryWriter
 
 from vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
 from vision.ssd.ssd import MatchPrior
@@ -103,19 +102,25 @@ parser.add_argument('--checkpoint_folder', default='models/',
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 args = parser.parse_args()
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() and args.use_cuda else "cpu")
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+print(DEVICE)
 
 if args.use_cuda and torch.cuda.is_available():
     torch.backends.cudnn.benchmark = True
     logging.info("Use Cuda.")
-
 
 def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     net.train(True)
     running_loss = 0.0
     running_regression_loss = 0.0
     running_classification_loss = 0.0
-    for i, data in enumerate(loader):
+
+    # for tensorboard
+    writer = SummaryWriter()
+    n_iter = 0
+
+    for i, data in tqdm(enumerate(loader)):
         images, boxes, labels = data
         images = images.to(device)
         boxes = boxes.to(device)
@@ -131,6 +136,13 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
+
+        # logging into tensorboard
+        writer.add_scalar('Train/Loss', loss.item(), n_iter)
+        writer.add_scalar('Train/Regression Loss', regression_loss.item(), n_iter)
+        writer.add_scalar('Train/Classification Loss', classification_loss.item(), n_iter)
+        n_iter += 1
+
         if i and i % debug_steps == 0:
             avg_loss = running_loss / debug_steps
             avg_reg_loss = running_regression_loss / debug_steps
@@ -321,14 +333,14 @@ if __name__ == '__main__':
         train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
         
-        if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
-            val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
-            logging.info(
-                f"Epoch: {epoch}, " +
-                f"Validation Loss: {val_loss:.4f}, " +
-                f"Validation Regression Loss {val_regression_loss:.4f}, " +
-                f"Validation Classification Loss: {val_classification_loss:.4f}"
-            )
-            model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
-            net.save(model_path)
-            logging.info(f"Saved model {model_path}")
+        # if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
+        #     val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
+        #     logging.info(
+        #         f"Epoch: {epoch}, " +
+        #         f"Validation Loss: {val_loss:.4f}, " +
+        #         f"Validation Regression Loss {val_regression_loss:.4f}, " +
+        #         f"Validation Classification Loss: {val_classification_loss:.4f}"
+        #     )
+        model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}.pth")
+        net.save(model_path)
+        logging.info(f"Saved model {model_path}")
