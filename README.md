@@ -27,11 +27,11 @@ $ kaggle datasets download solesensei/solesensei_bdd100k
 # follow instructions to conduct the directory structure as below.
 |- bdd100k -- bdd100k -- images -- 100k -- train -- (70000 images)
 |               |                        |- val -- (10000 images)
-|                     |
-|                     |- labels -- (.json)
-|                     |
-|                     |- xml -- train -- (.xml)
-|                     |- val -- (.xml)
+|               |
+|               |- labels -- (.json)
+|               |
+|               |- xml -- train -- (.xml)
+|               |- val -- (.xml)
 |
 |- pytorch-ssd - data -- VOCdevkit -- test -- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
      (our repo)   |                    |- VOC2007 -- (Annotations, ImageSets, JPEGImages,...)
